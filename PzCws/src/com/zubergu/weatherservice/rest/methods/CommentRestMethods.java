@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -22,10 +23,10 @@ public class CommentRestMethods {
 	
     }
     
-    @Path("last")
+    @Path("last/{number}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Comment> getLastComments(Integer numberOfLatstComments) {
+    public List<Comment> getLastComments(@PathParam("number") Integer numberOfLatstComments) {
 	List<Comment> comments = new ArrayList<Comment>();
 	
 	return comments;

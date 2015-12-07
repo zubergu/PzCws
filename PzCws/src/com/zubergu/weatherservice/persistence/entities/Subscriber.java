@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Subscriber {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer sid;
     
     private String email;

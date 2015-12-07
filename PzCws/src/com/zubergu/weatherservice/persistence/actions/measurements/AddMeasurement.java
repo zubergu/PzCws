@@ -10,7 +10,7 @@ public class AddMeasurement {
     
     public void execute(final Measurement measurement) {	
 	EntityManagerFactory emf = Persistence
-		.createEntityManagerFactory("$objectdb/localhost/WSC.odb");
+		.createEntityManagerFactory("$objectdb/localhost/PzCws.odb");
 	EntityManager em = emf.createEntityManager();
 
 	em.getTransaction().begin();

@@ -1,4 +1,4 @@
-package com.zubergu.weatherservice.rest.entities;
+package com.zubergu.weatherservice.persistence.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

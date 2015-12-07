@@ -6,15 +6,16 @@ import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 
-import com.zubergu.weatherservice.rest.entities.Subscriber;
+import com.zubergu.weatherservice.persistence.entities.Subscriber;
 
 @Path("subscriptions")
 public class SubscriptionRestMethods {
 
     @POST
     @Path("add")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
     public void saveSubscriberInDatabase(final Subscriber subscriber) {
 	EntityManagerFactory emf = Persistence
 		.createEntityManagerFactory("$objectdb/localhost/SubscribersDB.odb");

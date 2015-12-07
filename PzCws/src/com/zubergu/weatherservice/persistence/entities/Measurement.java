@@ -1,4 +1,4 @@
-package com.zubergu.weatherservice.rest.entities;
+package com.zubergu.weatherservice.persistence.entities;
 
 import java.io.Serializable;
 import java.util.Date;

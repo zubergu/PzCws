@@ -9,7 +9,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +16,6 @@ import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -26,7 +24,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import com.zubergu.weatherservice.rest.entities.Measurement;
+import com.zubergu.weatherservice.persistence.actions.measurements.AddMeasurement;
+import com.zubergu.weatherservice.persistence.actions.measurements.RetrieveMeasurement;
+import com.zubergu.weatherservice.persistence.entities.Measurement;
 
 @Path("measurements")
 public class MeasurementRestMethods {
@@ -35,6 +35,7 @@ public class MeasurementRestMethods {
     @GET
     public void saveNewMeasurementInDatabase() throws IOException,
 	    ParserConfigurationException, SAXException {
+	AddMeasurement addMeasurement = new AddMeasurement();
 	URL url = new URL("http://meteo.ftj.agh.edu.pl/meteo/meteo.xml");
 	URLConnection conn = url.openConnection();
 
@@ -83,17 +84,7 @@ public class MeasurementRestMethods {
 	measurement.setHail(Float.parseFloat(readFromXml(el, "ri")));
 	measurement.setHailIntensity(Float.parseFloat(readFromXml(el, "hi")));
 
-	EntityManagerFactory emf = Persistence
-		.createEntityManagerFactory("$objectdb/localhost/WSC.odb");
-	EntityManager em = emf.createEntityManager();
-
-	em.getTransaction().begin();
-
-	em.persist(measurement);
-	em.getTransaction().commit();
-
-	em.close();
-	emf.close();
+	addMeasurement.execute(measurement);
 
     }
 
@@ -101,21 +92,18 @@ public class MeasurementRestMethods {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Measurement retrieveLatestMeasurement() {
-
-	EntityManagerFactory emf = Persistence
-		.createEntityManagerFactory("$objectdb/localhost/WSC.odb");
-	EntityManager em = emf.createEntityManager();
-
-	em.getTransaction().begin();
-
-	Measurement latestMeasurement = em.find(Measurement.class, 17);
-	//TypedQuery<Measurement> query = em.createQuery("SELECT row FROM Measurement row where measurementId = 18", Measurement.class);
-	//List<Measurement> results = query.getResultList();
-	em.close();
-	emf.close();
-
-	//return results.get(0);
-	return latestMeasurement;
+	RetrieveMeasurement measurements = new RetrieveMeasurement();
+	return measurements.retrieveLatest();
+    }
+    
+    
+    @Path("date")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Measurement retrieveMeasurementForDate(Date date) {
+	Measurement m = null;
+	
+	return m;
     }
 
     private String readFromXml(String element, String tag) {

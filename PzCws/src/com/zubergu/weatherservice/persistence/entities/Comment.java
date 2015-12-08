@@ -16,7 +16,15 @@ public class Comment {
     private Integer cid;
 
     private String userName;
-    private String comment;
+    private String userComment;
+
+    public Integer getCid() {
+	return cid;
+    }
+
+    public void setCid(Integer cid) {
+	this.cid = cid;
+    }
 
     public String getUserName() {
 	return userName;
@@ -26,12 +34,12 @@ public class Comment {
 	this.userName = userName;
     }
 
-    public String getComment() {
-	return comment;
+    public String getUserComment() {
+	return userComment;
     }
 
-    public void setComment(String comment) {
-	this.comment = comment;
+    public void setUserComment(String userComment) {
+	this.userComment = userComment;
     }
 
 }

@@ -16,8 +16,8 @@ public class CommentAddTest {
 	AddComment action = new AddComment();
 	Comment comment = new Comment();
 	
-	comment.setComment("Fajnie, fajnie");
-	comment.setUserName("zubergu");
+	comment.setUserComment("Fajnie, fajnie");
+	comment.setUserName("zubergu2");
 	
 	action.execute(comment);
 	

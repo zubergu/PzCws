@@ -80,4 +80,26 @@ public class RetrieveMeasurement {
 	return forPeriod;
     }
 
+    public Float averageTemperatureForDay(Date date) {
+	List<Measurement> measurements = retrieveForDay(date);
+	float sum = 0;
+	for (Measurement m : measurements) {
+	    sum += m.getTemperature();
+	}
+
+	return sum / measurements.size();
+    }
+
+    public Float averageTemperatureForPeriod(Date startDate, Time startTime,
+	    Date endDate, Time endTime) {
+	List<Measurement> measurements = this.retrieveForPeriod(startDate,
+		startTime, endDate, endTime);
+	float sum = 0;
+	for (Measurement m : measurements) {
+	    sum += m.getTemperature();
+	}
+
+	return sum / measurements.size();
+    }
+
 }

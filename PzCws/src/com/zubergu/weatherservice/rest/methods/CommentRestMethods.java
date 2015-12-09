@@ -1,6 +1,5 @@
 package com.zubergu.weatherservice.rest.methods;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;

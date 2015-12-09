@@ -1,7 +1,8 @@
 package com.zubergu.weatherservice.persistence.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class Measurement implements Serializable {
     private int measurementId;
 
     private Date date;
+    private Time time;
     private Float temperature;
     private Float humidity;
     private Float odew;
@@ -42,6 +44,7 @@ public class Measurement implements Serializable {
     }
 
     public Measurement(final Date date, 
+	    final Time time,
 	    final Float temperature,
 	    final Float humidity,
 	    final Float odew, 
@@ -57,6 +60,7 @@ public class Measurement implements Serializable {
 	    final Float hail,
 	    final Float hailIntensity) {
 	this.setDate(date);
+	this.setTime(time);
 	this.setTemperature(temperature);
 	this.setHumidity(humidity);
 	this.setOdew(odew);
@@ -79,6 +83,14 @@ public class Measurement implements Serializable {
 
     public void setDate(Date date) {
 	this.date = date;
+    }
+
+    public Time getTime() {
+	return time;
+    }
+
+    public void setTime(Time time) {
+	this.time = time;
     }
 
     public Float getTemperature() {

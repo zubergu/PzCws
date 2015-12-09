@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.zubergu.weatherservice.persistence.actions.comments.AddComment;
 import com.zubergu.weatherservice.persistence.actions.comments.RetrieveComments;
 import com.zubergu.weatherservice.persistence.entities.Comment;
 
@@ -21,7 +22,7 @@ public class CommentRestMethods {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void addComment(Comment comment) {
-
+	new AddComment().execute(comment);
     }
 
     @Path("last/{number}")
@@ -30,7 +31,6 @@ public class CommentRestMethods {
     public List<Comment> getLastComments(
 	    @PathParam("number") Integer numberOfLastComments) {
 	RetrieveComments rc = new RetrieveComments();
-
 	return rc.retrieveLastComments(numberOfLastComments);
     }
 

@@ -13,7 +13,7 @@ public class RetrieveComments {
     @SuppressWarnings("unchecked")
     public List<Comment> retrieveLastComments(Integer numberOfComments) {
 	EntityManagerFactory emf = Persistence
-		.createEntityManagerFactory("$objectdb/localhost/PzCws.odb");
+		.createEntityManagerFactory("/home/zubergu/pzdatabase/PzCws.odb");
 	EntityManager em = emf.createEntityManager();
 
 	em.getTransaction().begin();

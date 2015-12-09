@@ -10,7 +10,7 @@ public class AddComment {
     
     public void execute(final Comment comment) {	
 	EntityManagerFactory emf = Persistence
-		.createEntityManagerFactory("$objectdb/localhost/PzCws.odb");
+		.createEntityManagerFactory("/home/zubergu/pzdatabase/PzCws.odb");
 	EntityManager em = emf.createEntityManager();
 
 	em.getTransaction().begin();

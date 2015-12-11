@@ -91,7 +91,7 @@ public class AddMeasurement {
      * parsing methods will be removed after moving save to 
      */
     private String readFromXml(String element, String tag) {
-	String regex = "<" + tag + ">\\.*(\\d+\\.?\\d*).*</" + tag + ">";
+	String regex = "<" + tag + ">\\.*(-?\\d+\\.?\\d*).*</" + tag + ">";
 	Pattern pattern = Pattern.compile(regex);
 	Matcher mt = pattern.matcher(element);
 

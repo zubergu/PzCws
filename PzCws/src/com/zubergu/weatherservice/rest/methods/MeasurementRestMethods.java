@@ -2,7 +2,6 @@ package com.zubergu.weatherservice.rest.methods;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
 import javax.ws.rs.Consumes;

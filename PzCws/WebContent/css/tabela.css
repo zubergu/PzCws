@@ -1,0 +1,20 @@
+table {
+	table-layout	: auto;
+	padding			: 5px;
+	width			: 100%;
+}
+
+/* WIERSZ */
+table tr, tbody {
+	padding			: 1px;
+}
+
+/* KOLUMNA */
+table td {
+	width			: 300px;
+	padding			: 1px;
+}
+
+table td:hover {
+	color: red;
+}

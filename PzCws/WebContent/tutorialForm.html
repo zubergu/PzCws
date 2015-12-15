@@ -1,28 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  
-  	<link rel="stylesheet" type="text/css" media="screen" href="css/menu_up.css" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Serwis pogodowy dla Krakowa</title>
+    
+    <!--  STYLE CSS ZEWNETRZNE -->
+	<link rel="stylesheet" type="text/css" media="screen" href="css/menu_up.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/menu_dropdown.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/bloki.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/background.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/formularz.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/stopka.css" />
-  
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
-    <script src="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
-    
-  <link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css"/>
-    
-    
-  </head>
-  <body>
-  
-  <div class="bw-c"><div id="logo"><div class="TYTUL">Kraków: Serwis Pogodowy</div></div></div>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+   </head>
+
+<body ng-app="myapp">
+<div class="bw-c"><div id="logo"><div class="TYTUL">Kraków: Serwis Pogodowy</div></div></div>
   <ol>
     <li><a href="index.html">Strona główna</a></li>
 
@@ -62,5 +58,37 @@
         </ul>
     </li>    
   </ol>
-  </body>
+
+<div id="blok_glowny">
+<div ng-controller="displayCommentsController">
+	
+	{{latestComments.comment[0].userName}} {{ latestComments.comment[0].userComment }}<br/>
+ 	{{latestComments.comment[1].userName}} {{ latestComments.comment[1].userComment }}<br/>
+ 	{{latestComments.comment[2].userName}} {{ latestComments.comment[2].userComment }}<br/>
+ 	{{latestComments.comment[3].userName}} {{ latestComments.comment[3].userComment }}<br/>
+
+</div>
+
+
+
+
+  <div>
+    {{latestComments.comment[1].userName}}
+  </div>
+  <div>
+    {{comment.userComment}}
+  </div>
+
+</div>
+
+
+<script>
+var myapp = angular.module('myapp', []);
+myapp.controller('displayCommentsController', function($scope, $http) {
+  $http.get("http://localhost:8080/PzCws/comments/last/5")
+  .then(function (response) {$scope.latestComments = response.data;});
+});
+</script>
+
+</body>
 </html>

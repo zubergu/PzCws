@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/bloki.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/background.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/formularz.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/stopka.css" />
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -58,42 +59,27 @@
     </li>    
   </ol>
   
-<div id="blok_glowny" style="height: 700px"><br/>
-<div id="blok_informacje">Na tej stronie można oglądać obraz na żywo z wielu miejsc w Krakowie</div><br/><br/>
+<div id="blok_glowny" style="height: 500px">
+<div id="blok_formularz">
+
+<div id="formularz">
+<p style="text-align:center; color: #6A6A6A; font-weight: bold">Aby zarejestrować się na stronie wypełnij formularz</p>
+
+
+	<form action="mailto:admin@admin.pl" method="post" enctype="text/plain" name="formularz" ng-submit="submit">
 	
-<!-- FIRST ROW -->
-	<div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow4" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Kamera na Rynek w Krakowie
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow-panorama" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Panorama Krakowa
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow2" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok na Wawel i zakole Wisły
-    </div>
-    
-<!-- SECOND ROW -->
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow3" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok na Rynek Podgórski
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/hotel-senacki-krakow" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok z Hotelu Senacki na ul. Grodzką
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow-wentzl" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        widok z hotelu Wentzl
-    </div>
-        
-<!-- THIRD ROW -->
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow1" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok z ulicy Grodzkiej
-    </div>
+    <label>Login</label><input type="text" name="name" placeholder="Podaj swój login" required="required">	
+	
+	<label>Haslo</label><input type="password" name="psw" placeholder="Podaj hasło" required="required">
+	<label>Powtorz haslo</label><input type="password" name="psw2" placeholder="Powtórz hasło" required="required">
+	
+    <label>E-mail</label><input name="email" type="email" placeholder="twojemail@costam.pl" required="required">
+
+    <input id="submit" type="submit" value="Zarejestruj">
+	<input id="reset" name="reset" type="reset" value="Reset">
+	</form>
+</div>
+</div>
    
 </div>
 

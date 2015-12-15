@@ -10,13 +10,15 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/bloki.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/background.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/formularz.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/stopka.css" />
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script type="text/javascript" src="js/Temperature.js"> </script>
+	<script type="text/javascript" src="js/ng-newsletter.js"> </script>
+
    </head>
 
-<body>
+<body ng-app="myapp">
 	<div class="bw-c"><div id="logo"><div class="TYTUL">Kraków: Serwis Pogodowy</div></div></div>
   <ol>
     <li><a href="index.html">Strona główna</a></li>
@@ -58,47 +60,31 @@
     </li>    
   </ol>
   
-<div id="blok_glowny" style="height: 700px"><br/>
-<div id="blok_informacje">Na tej stronie można oglądać obraz na żywo z wielu miejsc w Krakowie</div><br/><br/>
+<div id="blok_glowny" style="height: 400px">
+<div id="blok_formularz">
+
+<div id="formularz">
+<p style="text-align:center; color: #6A6A6A; font-weight: bold">Zapisz się do Newslettera!</p>
+
+	<div ng-controller="MyController">
+	<form name="formularz">
 	
-<!-- FIRST ROW -->
-	<div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow4" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Kamera na Rynek w Krakowie
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow-panorama" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Panorama Krakowa
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow2" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok na Wawel i zakole Wisły
-    </div>
-    
-<!-- SECOND ROW -->
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow3" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok na Rynek Podgórski
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/hotel-senacki-krakow" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok z Hotelu Senacki na ul. Grodzką
-    </div>
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow-wentzl" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        widok z hotelu Wentzl
-    </div>
-        
-<!-- THIRD ROW -->
-    <div id="blok_cams">
-    	<iframe src="http://imageserver.webcamera.pl/umiesc/krakow1" width="280" height="auto" border="0" frameborder="0" scrolling="no"></iframe>
-        Widok z ulicy Grodzkiej
-    </div>
+	<label>Imie</label><input type="text" name="imie" placeholder="Podaj swoje imie" required="required" ng-model="subscriber.userFirstName">	
+    <label>Nazwisko</label><input type="text" name="name" placeholder="Podaj swoje nazwisko" required="required" ng-model="subscriber.userLastName">	
+	
+	<label>E-mail</label><input type="email" name="email" placeholder="Podaj swój adres e-mail" required="required" ng-model="subscriber.email">
+	
+    <button ng-click="subscriber.submitTheForm()">Submit Form</button>
+	<input id="reset" name="reset" type="reset" value="Reset">
+	</form>
+	</div>
+</div>
+</div>
+
    
 </div>
 
 <br/>
 <div id="STOPKA">Strona używa <span style="color: #3b9adb; font-style: oblique; font-weight: bold">HTML5</span>, <span style="color: #e34f26; font-style: oblique; font-weight: bold">CSS3</span>, AngularJS oraz JavaScript i silnika Webkit<br/>zalecane przeglądanie w przeglądarkach nowszych niż: Chrome (od wersji 27) oraz Opera (od wersji 14)<br/>Firefox standardowo nie wspiera silnika Webkit</div>
-
 </body>
 </html>

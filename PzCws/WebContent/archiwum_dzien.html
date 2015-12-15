@@ -4,49 +4,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Serwis pogodowy dla Krakowa</title>
 
-<! STYLE CSS ZEWNETRZNE >
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/menu_up.css" />
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/menu_dropdown.css" />
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/style.css" />
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/bloki.css" />
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/background.css" />
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/stopka.css" />
-	
-	<link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css"/>
+<!-- STYLE CSS ZEWNETRZNE -->
+<link rel="stylesheet" type="text/css" media="screen" href="css/menu_up.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/menu_dropdown.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/bloki.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/background.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/stopka.css" />
 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
 	
-	<script>
+<link rel="stylesheet" type="text/css" media="screen" href="css/angular-material.css"/>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
+	
+<script>
     angular.module('datepickerBasicUsage', ['ngMaterial'])
     .controller('AppCtrl', function ($scope) {
       $scope.myDate = new Date();
     });
-    </script>
+</script>
 
 </head>
 
 <body>
 
-
-	<div class="bw-c">
-		<div id="logo">
-			<div class="TYTUL">Kraków: Serwis Pogodowy</div>
+	<div class="bw-c"><div id="logo">
+		<div class="TYTUL">Kraków: Serwis Pogodowy</div>
 		</div>
 	</div>
 	<ol>
@@ -64,7 +53,7 @@
 				<li><a href="down_przedzial.html">Przedział</a></li>
 			</ul></li>
 
-		<li><a href="#">Statystyki</a></li>
+		<li><a href="stats.html">Statystyki</a></li>
 
 
 		<li><a href="#">Galeria</a>
@@ -83,19 +72,38 @@
 				<li><a href="newsletter.html">Newsletter</a></li>
 			</ul></li>
 	</ol>
+	
+<div id="blok_glowny"><br/>
 
-<div  ng-app="datepickerBasicUsage" ng-controller="AppCtrl" style='padding: 40px;'>
+	<div id="blok_informacje">Wybierz dzień dla którego chcesz wyświetlić informacje pogodowe:</div>
+	<br/><br/>
+	
+	<div  ng-app="datepickerBasicUsage" ng-controller="AppCtrl" style="padding: 40px; width: 250px; float: left">
     <md-content>
       <h4>Wybierz dzien</h4>
       <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
     </md-content>
   </div>
-
-
-	
-
-
-
+  
+	<div id="blok_temperatura_aktualna" style="margin-left: 50px">
+		
+		<br/><br/>
+		Wybrałeś dzień: <br/>
+		Temperatura: <div ng-app="myApp" ng-controller="latestTemp">
+						<ul>
+  							<li ng-repeat="x in latestTemperature">
+    							{{ x.LatestTemp }}
+  							</li>
+						</ul>
+					</div><br/>
+		Ciśnienie: <br/>
+		Kierunek wiatru: <br/>
+		Prędkość wiatru: <br/>
+		Wilgotność: <br/>
+		Opady: <br/>
+	</div>
+   
+</div>
 
 	<br />
 	<div id="STOPKA">

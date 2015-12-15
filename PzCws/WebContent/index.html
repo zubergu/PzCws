@@ -11,9 +11,10 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="css/bloki.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/background.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="css/stopka.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/tabela.css" />
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script type="text/javascript" src="js/Temperature.js"> </script>
+	<script type="text/javascript" src="js/ng-temperature.js"> </script>
    </head>
 
 <body>
@@ -35,7 +36,7 @@
       	</ul>
     </li>
 
-    <li><a href="#">Statystyki</a>
+    <li><a href="stats.html">Statystyki</a>
 	</li>
 
 
@@ -66,19 +67,65 @@
 	<div id="blok_temperatura_aktualna">
 		<span style="font-size:20px">Aktualna pogoda w Krakowie:</span>
 		<br/><br/>
-		Ostatnia aktualizacja: <br/>
-		Temperatura: <div ng-app="myApp" ng-controller="latestTemp">
-						<ul>
-  							<li ng-repeat="x in latestTemperature">
-    							{{ x.LatestTemp }}
-  							</li>
-						</ul>
-					</div><br/>
-		Ciśnienie: <br/>
-		Kierunek wiatru: <br/>
-		Prędkość wiatru: <br/>
-		Wilgotność: <br/>
-		Opady: <br/>
+			<div ng-app="latestMeasurements" ng-controller="latestMeas">
+            <table>
+            	<tbody>
+                	<tr>
+                    	<td>Temperatura:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.temperature}} °C</td>
+                    </tr>
+                    <tr>
+                    	<td>Wilgotność powietrza:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.humidity}} %</td>
+                    </tr>
+                    <tr>
+                    	<td>Temp. punktu rosy:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.odew}} °C</td>
+                    </tr>
+                    <tr>
+                    	<td>windchill temp.:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.windchill}} °C</td>
+                    </tr>
+                    <tr>
+                    	<td>Maksymalna prędkość wiatru:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.windSpeedMax}} m/s</td>
+                    </tr>
+                    <tr>
+                    	<td>Prędkość wiatru:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.windSpeedAvg}} m/s</td>
+                    </tr>
+                    <tr>
+                    	<td>Kierunek wiatru:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.windDirection}}°</td>
+                    </tr>
+                    <tr>
+                    	<td>Ciśnienie:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.pressure}} hPa</td>
+                    </tr>
+                    <tr>
+                    	<td>Ciśnienie barometryczne:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.pressureSeaLevel}} hPa</td>
+                    </tr>
+                    <tr>
+                    	<td>Opad:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.rain}} mm</td>
+                    </tr>
+                    <tr>
+                    	<td>Opad (intensywność):</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.rainIntensity}} mm/h</td>
+                    </tr>
+                    <tr>
+                    	<td>Grad:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.hail}} hits/cm^2</td>
+                    </tr>
+                    <tr>
+                    	<td>Intensywnosc gradu:</td>
+                        <td style="font-size:16px; font-weight: bold">{{latestMeasurement.hailIntensity}} hits/(cm^2*h)</td>
+                    </tr>
+                </tbody>
+            </table>
+			</div>
+
 	</div>
    
 </div>

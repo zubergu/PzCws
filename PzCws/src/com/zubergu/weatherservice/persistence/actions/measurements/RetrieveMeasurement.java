@@ -1,6 +1,5 @@
 package com.zubergu.weatherservice.persistence.actions.measurements;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class RetrieveMeasurement {
 
 	em.getTransaction().begin();
 
-	// Measurement latestMeasurement = em.find(Measurement.class, 17);
 	Query q = em
 		.createQuery("SELECT m from Measurement m order by m.measurementId DESC");
 	q.setMaxResults(1);
@@ -49,6 +47,7 @@ public class RetrieveMeasurement {
 	em.getTransaction().begin();
 	Query q = em
 		.createQuery("SELECT m from Measurement m where (m.date == :myDate)");
+
 	List<Measurement> forDay = (List<Measurement>) (q.setParameter(
 		"myDate", date, TemporalType.DATE).getResultList());
 
@@ -59,19 +58,18 @@ public class RetrieveMeasurement {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Measurement> retrieveForPeriod(Date startDate, Time startTime,
-	    Date endDate, Time endTime) {
+    public List<Measurement> retrieveForPeriod(Date startDate, Date endDate) {
 	EntityManagerFactory emf = Persistence
 		.createEntityManagerFactory("/home/zubergu/pzdatabase/PzCws.odb");
 	EntityManager em = emf.createEntityManager();
 
 	em.getTransaction().begin();
 	Query q = em
-		.createQuery("SELECT m from Measurement m where (m.date >= :startDate AND m.date <= endDate AND m.time >= startTime AND m.time <= endTime)");
+		.createQuery("SELECT m from Measurement m where (m.date >= :startDate AND m.date <= :endDate)");
 	q.setParameter("startDate", startDate, TemporalType.DATE);
-	q.setParameter("startTime", startTime, TemporalType.DATE);
+
 	q.setParameter("endDate", endDate, TemporalType.DATE);
-	q.setParameter("endTime", endTime, TemporalType.DATE);
+
 	List<Measurement> forPeriod = (List<Measurement>) (q.getResultList());
 
 	em.close();
@@ -89,17 +87,68 @@ public class RetrieveMeasurement {
 
 	return sum / measurements.size();
     }
+    
+    public Float minTemperatureForDay(Date date) {
+	List<Measurement> measurements = retrieveForDay(date);
+	float min = Float.POSITIVE_INFINITY;
+	for (Measurement m : measurements) {
+	    if (m.getTemperature() < min) {
+		min = m.getTemperature();
+	    }
+	}
 
-    public Float averageTemperatureForPeriod(Date startDate, Time startTime,
-	    Date endDate, Time endTime) {
+	return min;
+    }
+    
+    
+    public Float maxTemperatureForDay(Date date) {
+	List<Measurement> measurements = retrieveForDay(date);
+	float max = Float.NEGATIVE_INFINITY;
+	for (Measurement m : measurements) {
+	    if (m.getTemperature() > max) {
+		max = m.getTemperature();
+	    }
+	}
+
+	return max;
+    }
+    
+
+    public Float averageTemperatureForPeriod(Date startDate, Date endDate) {
 	List<Measurement> measurements = this.retrieveForPeriod(startDate,
-		startTime, endDate, endTime);
+		endDate);
 	float sum = 0;
 	for (Measurement m : measurements) {
 	    sum += m.getTemperature();
 	}
 
 	return sum / measurements.size();
+    }
+
+    public Float minTemperatureForPeriod(Date startDate, Date endDate) {
+	List<Measurement> measurements = this.retrieveForPeriod(startDate,
+		endDate);
+	float min = Float.POSITIVE_INFINITY;
+	for (Measurement m : measurements) {
+	    if (m.getTemperature() < min) {
+		min = m.getTemperature();
+	    }
+	}
+
+	return min;
+    }
+
+    public Float maxTemperatureForPeriod(Date startDate, Date endDate) {
+	List<Measurement> measurements = this.retrieveForPeriod(startDate,
+		endDate);
+	float max = Float.NEGATIVE_INFINITY;
+	for (Measurement m : measurements) {
+	    if (m.getTemperature() > max) {
+		max = m.getTemperature();
+	    }
+	}
+
+	return max;
     }
 
 }

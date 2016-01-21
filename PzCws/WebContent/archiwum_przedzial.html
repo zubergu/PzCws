@@ -3,20 +3,26 @@
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
-  	<link rel="stylesheet" type="text/css" media="screen" href="css/menu_up.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/menu_dropdown.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="css/bloki.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="css/background.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="css/stopka.css" />
-  
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
-    <script src="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
-    
-  <link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css"/>
+  	<!-- STYLE CSS ZEWNETRZNE -->
+<link rel="stylesheet" type="text/css" media="screen" href="css/menu_up.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/menu_dropdown.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/bloki.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/background.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/stopka.css" />
+
+	
+<link rel="stylesheet" type="text/css" media="screen" href="css/angular-material.css"/>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
+<script type="text/javascript" src="js/ng-archivalMeasurements.js"> </script>
     
     
   </head>
@@ -32,15 +38,12 @@
         <li><a href="archiwum_przedzial.html">Przedział</a></li>
       </ul>
     </li>
-	
-	<li><a href="#">Download</a>
-      	<ul>
-        	<li><a href="down_dzien.html">Konkretny dzień</a></li>
-        	<li><a href="down_przedzial.html">Przedział</a></li>
-      	</ul>
-    </li>
 
-    <li><a href="stats.html">Statystyki</a>
+    <li><a href="stats_dzien.html">Statystyki</a>
+    <ul>
+        	<li><a href="stats_dzien.html">Konkretny dzień</a></li>
+        	<li><a href="stats_przedzial.html">Przedział</a></li>
+      	</ul>
 	</li>
 
 
@@ -56,11 +59,91 @@
     <li><a href="#">Kontakt</a>
     	<ul>
 			<li><a href="rejestracja.html">Rejestracja</a></li>
-    		<li><a href="login.html">Zaloguj</a></li>
+    		<li><a href="login.jsp">Zaloguj</a></li>
         	<li><a href="kontakt.html">Kontakt</a></li>
     		<li><a href="newsletter.html">Newsletter</a></li>
         </ul>
     </li>    
   </ol>
+  
+  
+  <div id="blok_glowny"  >
+  	<br/>
+	<div ng-app="archivalMeasurements" ng-controller="archMeasPeriod" style="padding: 40px; width: 250px; float: left">
+    <md-content>
+      <h4>Początek przedziału</h4>
+      <md-datepicker ng-model="myStartDate" md-placeholder="Enter date"></md-datepicker>
+    </md-content>
+    
+    <md-content>
+      <h4>Koniec przedziału</h4>
+      <md-datepicker ng-model="myEndDate" md-placeholder="Enter date"></md-datepicker>
+    </md-content>
+  
+		<br/><br/>
+	 	<input type="submit" value="Szukaj" ng-click="showPeriod()"/> <br/>
+		
+		<div  id="blok_temperatura_aktualna"  style="margin-left: 50px">
+		<p>Początek wybranego przedziału: {{myStartDate|date:'yyyy-MM-dd'}}</p>
+		<p>Koniec wybranego przedziału:   {{myEndDate|date:'yyyy-MM-dd'}}</p>
+			Temperatura: <div >
+							<ul>
+	  							<li ng-repeat="x in periodMeasurement">
+	    							{{x.temperature }} °C
+	  							</li>
+							</ul>
+							
+						</div>
+			Ciśnienie: <div >
+							<ul>
+	  							<li ng-repeat="x in periodMeasurement">
+	    							{{ x.pressure }} hPa
+	  							</li>
+							</ul>
+							
+						</div> 
+			Kierunek wiatru: <div >
+							<ul>
+	  							<li ng-repeat="x in periodMeasurement">
+	    							{{ x.windDirection }} °
+	  							</li>
+							</ul>
+							
+						</div>
+			Prędkość wiatru: <div >
+							<ul>
+	  							<li ng-repeat="x in periodMeasurement">
+	    							{{ x.windSpeedAvg }} m/s
+	  							</li>
+							</ul>
+							
+						</div>
+			Wilgotność: <div >
+							<ul>
+	  							<li ng-repeat="x in periodMeasurement">
+	    							{{ x.humidity }} %
+	  							</li>
+							</ul>
+							
+						</div>
+			Opad: <div >
+							<ul>
+	  							<li ng-repeat="x in periodMeasurement">
+	    							{{ x.rain }} mm
+	  							</li>
+							</ul>
+							
+						</div>
+						
+						<a download="measurementArchive.txt" id="downloadlink" style="display: none">Download</a>
+						<button id="create">Create file</button>
+		</div>
+	</div>	
+</div>
+  
+  
+  
+  
+  
   </body>
 </html>

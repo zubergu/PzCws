@@ -3,12 +3,14 @@ package com.zubergu.weatherservice.rest.methods;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.zubergu.weatherservice.other.emails.SendMessageToSubscribers;
 import com.zubergu.weatherservice.persistence.actions.subscriptions.AddSubscriber;
 import com.zubergu.weatherservice.persistence.actions.subscriptions.RetrieveSubscriber;
 import com.zubergu.weatherservice.persistence.entities.Subscriber;
@@ -30,5 +32,13 @@ public class SubscriptionRestMethods {
     public List<Subscriber> retrieveAllSubscribers() {
 	RetrieveSubscriber rs = new RetrieveSubscriber();
 	return rs.retrieveAll();
+    }
+
+    @POST
+    @Path("send")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void sendMessageToSubscribers(@FormParam("message") String message) {
+	new SendMessageToSubscribers().execute(
+		new RetrieveSubscriber().retrieveAll(), message);
     }
 }

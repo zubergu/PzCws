@@ -23,7 +23,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
-<script type="text/javascript" src="js/ng-archivalMeasurements.js"> </script>
+<script type="text/javascript" src="js/ng-averageTemperature.js"> </script>
 
 
 
@@ -32,7 +32,8 @@
 </head>
 
 <body>
-<div class="bw-c"><div id="logo"><div class="TYTUL">Kraków: Serwis Pogodowy</div></div></div>
+
+	<div class="bw-c"><div id="logo"><div class="TYTUL">Kraków: Serwis Pogodowy</div></div></div>
   <ol>
     <li><a href="index.html">Strona główna</a></li>
 
@@ -71,79 +72,43 @@
   </ol>
 	
 <div id="blok_glowny"  ><br/>
-	<div ng-app="archivalMeasurements" ng-controller="archMeas" style="padding: 40px; width: 250px; float: left">
+	<div ng-app="averageTemperature" ng-controller="avrgTempPeriod" style="padding: 40px; width: 250px; float: left">
     <md-content>
-      <h4>Wybierz dzien</h4>
-      <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+      <h4>Początek przedziału</h4>
+      <md-datepicker ng-model="myStartDate" md-placeholder="Enter date"></md-datepicker>
+    </md-content>
+    
+    <md-content>
+      <h4>Koniec przedziału</h4>
+      <md-datepicker ng-model="myEndDate" md-placeholder="Enter date"></md-datepicker>
     </md-content>
   
 		<br/><br/>
-	 	<input type="submit" value="Szukaj" ng-click="show()"/> <br/>
+	 	<input type="submit" value="Szukaj" ng-click="showPeriod()"/> <br/>
 		
 		<div  id="blok_temperatura_aktualna"  style="margin-left: 50px">
-		Wybrałeś dzień: {{myDate|date:'yyyy-MM-dd'}}<br/>
-			Temperatura: <div >
-							<ul>
-	  							<li ng-repeat="x in dayMeasurement">
-	    							{{x.temperature }} °C
-	  							</li>
-							</ul>
-							
-						</div>
-			Ciśnienie: <div >
-							<ul>
-	  							<li ng-repeat="x in dayMeasurement">
-	    							{{ x.pressure }} hPa
-	  							</li>
-							</ul>
-							
-						</div> 
-			Kierunek wiatru: <div >
-							<ul>
-	  							<li ng-repeat="x in dayMeasurement">
-	    							{{ x.windDirection }} °
-	  							</li>
-							</ul>
-							
-						</div>
-			Prędkość wiatru: <div >
-							<ul>
-	  							<li ng-repeat="x in dayMeasurement">
-	    							{{ x.windSpeedAvg }} m/s
-	  							</li>
-							</ul>
-							
-						</div>
-			Wilgotność: <div >
-							<ul>
-	  							<li ng-repeat="x in dayMeasurement">
-	    							{{ x.humidity }} %
-	  							</li>
-							</ul>
-							
-						</div>
-			Opad: <div >
-							<ul>
-	  							<li ng-repeat="x in dayMeasurement">
-	    							{{ x.rain }} mm
-	  							</li>
-							</ul>
-							
-						</div>
-						<a download="measurementArchive.txt" id="downloadlink" style="display: none">Download</a>
-						<button id="create">Create file</button> 
-						
-						
-						
-			
-						
+		<p>Początek wybranego przedziału: {{myStartDate|date:'yyyy-MM-dd'}}</p>
+		<p>Koniec wybranego przedziału:   {{myEndDate|date:'yyyy-MM-dd'}}</p>
+			Średnia temperatura: {{averageTemperaturePeriod}} °C <br>
+			Temperatura minimalna w przedziale:  {{minTemperaturePeriod}} °C <br>
+			Temperatura maksymalna w przedziale:  {{maxTemperaturePeriod}} °C <br>
 		</div>
-</div>
-
-<div>
- 
+	</div>	
 </div>
 	
+	
+	
+   
+
+	<br />
+	<div id="STOPKA">
+		Strona używa <span
+			style="color: #3b9adb; font-style: oblique; font-weight: bold">HTML5</span>,
+		<span style="color: #e34f26; font-style: oblique; font-weight: bold">CSS3</span>,
+		AngularJS oraz JavaScript i silnika Webkit<br />zalecane przeglądanie
+		w przeglądarkach nowszych niż: Chrome (od wersji 27) oraz Opera (od
+		wersji 14)<br />Firefox standardowo nie wspiera silnika Webkit
+	</div>
 
 </body>
 </html>

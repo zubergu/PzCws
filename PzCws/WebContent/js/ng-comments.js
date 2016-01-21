@@ -13,10 +13,12 @@ var commentApp = angular.module("commentApp", [])
     	var responsePromise = $http.post("http://localhost:8080/PzCws/comments/add", comment, {});
     	responsePromise.success(function(dataFromServer, status, headers, config) {
     		console.log(dataFromServer.title);
+	
     	});
         responsePromise.error(function(data, status, headers, config) {
         	alert("Submitting form failed!");
         });
+        
 	}
     
 	$http.get("http://localhost:8080/PzCws/comments/last/5")

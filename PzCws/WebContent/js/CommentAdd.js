@@ -1,11 +1,11 @@
 var postApp = angular.module('postApp', []);
-    // Controller function and passing $http service and $scope var.
-    postApp.controller('postController', function($scope, $http) {
-      // create a blank object to handle form data.
+    
+    postApp.controller('postController', function($scope, $http, $window) {
+     
         $scope.commment = {};
-      // calling our submit function.
-        $scope.submitForm = function() {
-        // Posting data to php file
+      
+        $scope.submitForm = function($window) {
+        
         $http({
           method  : 'POST',
           url     : '/PzCws/comments/add',
@@ -14,13 +14,18 @@ var postApp = angular.module('postApp', []);
          })
           .success(function(data) {
             if (data.errors) {
-              // Showing errors.
+              
               $scope.errorName = data.errors.name;
               $scope.errorUserName = data.errors.username;
               $scope.errorEmail = data.errors.email;
             } else {
               $scope.message = data.message;
+             
             }
           });
+        
+        $window.location.reload();
         };
+        
+        
     });
